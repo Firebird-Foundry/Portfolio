@@ -5,6 +5,14 @@ const config = {
 	plugins: [sveltekit()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
+	},
+	vite: {
+		server: {
+			port: 3000,
+			watch: {
+				usePolling: true,
+			}
+		}
 	}
 };
 
