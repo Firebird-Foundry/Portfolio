@@ -4,4 +4,4 @@
     export let data: PageData;
 </script>
 
-<h3>You've reached a page about {data.ProjectTitle}</h3>
+<h3>You've reached a page about decidedly NOT about {data.ProjectTitle}</h3>
