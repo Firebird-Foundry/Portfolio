@@ -4,27 +4,31 @@
     export let data: PageData;
 </script>
 
+<svelte:head>
+    <title>{data.Project.name}</title>
+</svelte:head>
+
 <div class="w-3/4 m-auto">
     {#if !!data.HeadingImage}
-        <img class="w-full" src={data.HeadingImage.fileUrl} alt={data.HeadingImage.title} />
+        <img class="w-full mb-12" src={data.HeadingImage.fileUrl} alt={data.HeadingImage.title} />
     {/if}
 
-    <p>
+    <p class="text-center">
         {data.Project.blurb}
     </p>
-    ---------------------------------------------------------
-    <div class="grid grid-cols-4 gap-4">
+    
+    <div class="grid grid-cols-4 gap-4 my-12">
         {#each data.BodyImages as image, i}
             {#if i % 2 == 0}
-                <p class="col-span-1 m-auto">{image.description}</p>
+                <p class="col-span-1 m-auto text-center">{image.description}</p>
                 <img class="col-span-3" src={image.fileUrl} alt={image.title} />
             {:else}
                 <img class="col-span-3" src={image.fileUrl} alt={image.title} />
-                <p class="col-span-1 m-auto">{image.description}</p>
+                <p class="col-span-1 m-auto text-center">{image.description}</p>
             {/if}
         {/each}
     </div>
-    ------------------------------------
+    
     <div class="flex mb-4">
         <div class="w-1/4">
             {#each data.Column1 as image}

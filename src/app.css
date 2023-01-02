@@ -1,4 +1,17 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+p {
+    font-family: 'BodoniFLF';
+    font-size: 1.2rem;
+    color: #FFFFFF;
+}
+
+h1, h2, h3 {
+    font-family: 'Futura-BoldLF';
+    font-size: 2rem;
+    font-weight: bolder;
+}
 
