@@ -1,2 +1,24 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+    import type { PageServerData } from './$types';
+    
+    export let data: PageServerData;
+</script>
+
+<div class="grid grid-cols-4 gap-4">
+    {#each data.CoverImages as coverImage}
+        <div class="column">
+            <h2 class="text-slate-400">{ coverImage.expandedProject.name}</h2>
+
+            <img src={coverImage.fileUrl} alt={ coverImage.title }>
+        </div>
+    {/each}
+</div>
+
+<style lang="scss">
+   .column {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       max-width: 12rem;
+   }
+</style>
