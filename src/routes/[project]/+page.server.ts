@@ -1,5 +1,5 @@
-import type { PageLoad } from './$types';
-import { PocketBaseClient } from '$lib/pocketbaseClient';
+import type { PageServerLoad } from './$types';
+import { PocketBaseClient } from '$lib/pocketbaseClient.server';
 import type { Project } from '$lib/project';
 import type { Image } from '$lib/image';
 
@@ -28,5 +28,14 @@ export const load = (async ({params}) => {
     let column3 = galleryImages.filter((x, i) => i % 4 == 2);
     let column4 = galleryImages.filter((x, i) => i % 4 == 3);
 
-    return { Project: project, HeadingImage: headingImage, GalleryImages: galleryImages, BodyImages: bodyImages, Column1: column1, Column2: column2, Column3: column3, Column4: column4 };
-}) satisfies PageLoad;
+    return { 
+                Project: JSON.parse(JSON.stringify(project)), 
+                HeadingImage: JSON.parse(JSON.stringify(headingImage)),    
+                GalleryImages: JSON.parse(JSON.stringify(galleryImages)), 
+                BodyImages: JSON.parse(JSON.stringify(bodyImages)), 
+                Column1: JSON.parse(JSON.stringify(column1)), 
+                Column2: JSON.parse(JSON.stringify(column2)), 
+                Column3: JSON.parse(JSON.stringify(column3)),
+                Column4: JSON.parse(JSON.stringify(column4)) 
+            };
+}) satisfies PageServerLoad;
