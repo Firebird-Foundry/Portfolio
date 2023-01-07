@@ -1,17 +1,18 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Alice&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 p {
-    font-family: 'BodoniFLF';
-    font-size: 1.2rem;
-    color: #FFFFFF;
+	font-family: 'Alice';
+	font-size: 1.6rem;
+	@apply text-secondary;
 }
 
-h1, h2, h3 {
-    font-family: 'Futura-BoldLF';
-    font-size: 2rem;
-    font-weight: bolder;
+h1,
+h2,
+h3 {
+	font-family: 'Futura-BoldLF';
+	font-size: 2rem;
+	font-weight: bolder;
 }
-
