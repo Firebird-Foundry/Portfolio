@@ -2,6 +2,7 @@ import type { PageServerLoad } from './$types';
 import { PocketBaseClient } from '$lib/pocketbaseClient.server';
 import type { Project } from '$lib/project';
 import type { Image } from '$lib/image';
+import axios from 'axios';
 
 function randomize<T>(array: T[]): T[] {
 	return array.map((x) => x).sort(() => Math.random() - 0.5);
@@ -14,9 +15,14 @@ export const load = (async ({ params }) => {
 	const images = await PocketBaseClient.collection('images').getList<Image>(1, 50, {
 		filter: `project = '${project.id}' && isCoverImage = false`
 	});
-	images.items.forEach((item) => {
-		item.fileUrl = PocketBaseClient.getFileUrl(item, item.file);
-	});
+
+	for (let i = 0; i < images.items.length; i++) {
+		images.items[i].fileUrl = PocketBaseClient.getFileUrl(images.items[i], images.items[i].file);
+		var fileData = await axios.get(images.items[i].fileUrl, {
+			  	responseType: 'arraybuffer'
+				});
+		images.items[i].fileBase64 = "data:image/png;base64," + Buffer.from(fileData.data, 'binary').toString('base64');
+	}
 
 	var headingImageIndex = images.items.findIndex((image) => image.isHeaderImage);
 	var headingImage = images.items.splice(headingImageIndex, 1)[0];
