@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Image } from '$lib/image';
 	import Icon from '@iconify/svelte';
+	import { onMount } from 'svelte';
 	// provided by <Modals />
 
 	function previousImage(e: Event) {
@@ -9,11 +10,11 @@
 		setTimeout(() => {
 			prevImageVisible = true;
 		}, 300);
-		const index = images.findIndex((image) => image.fileUrl === src);
+		const index = images.findIndex((image) => image.fileBase64 === src);
 		if (index === 0) {
-			src = images[images.length - 1].fileUrl;
+			src = images[images.length - 1].fileBase64;
 		} else {
-			src = images[index - 1].fileUrl;
+			src = images[index - 1].fileBase64;
 		}
 	}
 
@@ -23,26 +24,28 @@
 		setTimeout(() => {
 			nextImageVisible = true;
 		}, 300);
-		const index = images.findIndex((image) => image.fileUrl === src);
+		const index = images.findIndex((image) => image.fileBase64 === src);
 
 		if (index === images.length - 1) {
-			src = images[0].fileUrl;
+			src = images[0].fileBase64;
 		} else {
-			src = images[index + 1].fileUrl;
+			src = images[index + 1].fileBase64;
 		}
 	}
 
-	document.onkeydown = (e) => {
-		if (e.key === 'Escape') {
-			isOpen = false;
-		}
-		if (e.key === 'ArrowLeft') {
-			previousImage(e);
-		}
-		if (e.key === 'ArrowRight') {
-			nextImage(e);
-		}
-	};
+	onMount(() => {
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') {
+				isOpen = false;
+			}
+			if (e.key === 'ArrowLeft') {
+				previousImage(e);
+			}
+			if (e.key === 'ArrowRight') {
+				nextImage(e);
+			}
+		});
+	});
 
 	export let isOpen: boolean;
 	export let src: string;

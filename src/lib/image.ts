@@ -10,4 +10,5 @@ export interface Image extends Record {
 	file: string;
 	fileUrl: string;
 	expandedProject: Project;
+	fileBase64: string;
 }

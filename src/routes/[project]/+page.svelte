@@ -2,6 +2,19 @@
 	import type { PageData } from './$types';
 	import Modal from '$lib/components/Modal.svelte';
 
+	function getFileBase64FromUrl(url: string): Promise<string> {
+		return fetch(url)
+			.then((response) => response.blob())
+			.then((blob) => {
+				return new Promise((resolve, reject) => {
+					const reader = new FileReader();
+					reader.onloadend = () => resolve(reader.result?.toString() ?? '');
+					reader.onerror = reject;
+					reader.readAsDataURL(blob);
+				});
+			});
+	}
+
 	function openImageModal(src: string, e: Event) {
 		if (showModal) return;
 
@@ -26,7 +39,9 @@
 
 	<div class="w-[97%] md:w-3/4  m-auto">
 		{#if !!data.HeadingImage}
-			<img class="w-full mb-8" src={data.HeadingImage.fileUrl} alt={data.HeadingImage.title} />
+			{#await getFileBase64FromUrl(data.HeadingImage.fileUrl) then base64}
+				<img class="w-full mb-8" src={base64} alt={data.HeadingImage.title} />				
+			{/await}
 		{/if}
 
 		<p class="text-center mb-16">
@@ -36,37 +51,43 @@
 		<div class="md:flex mb-6">
 			<div class="w-full md:w-1/3 p-4">
 				{#each data.BodyImagesFirstThird as image}
-					<img
-						class="w-full rounded-3xl"
-						on:click={(e) => openImageModal(image.fileUrl, e)}
-						on:keypress={(e) => openImageModal(image.fileUrl, e)}
-						src={image.fileUrl}
-						alt={image.title}
-					/>
+					{#await getFileBase64FromUrl(image.fileUrl) then base64}
+						<img
+							class="w-full rounded-3xl"
+							on:click={(e) => openImageModal(base64, e)}
+							on:keypress={(e) => openImageModal(base64, e)}
+							src={base64}
+							alt={image.title}
+						/>			
+					{/await}
 					<p class="m-auto text-center mb-16 mt-8">{image.description}</p>
 				{/each}
 			</div>
 			<div class="w-full md:w-1/3 p-4">
 				{#each data.BodyImagesSecondThird as image}
-					<img
-						class="w-full rounded-3xl"
-						on:click={(e) => openImageModal(image.fileUrl, e)}
-						on:keypress={(e) => openImageModal(image.fileUrl, e)}
-						src={image.fileUrl}
-						alt={image.title}
-					/>
+					{#await getFileBase64FromUrl(image.fileUrl) then base64}
+						<img
+							class="w-full rounded-3xl"
+							on:click={(e) => openImageModal(base64, e)}
+							on:keypress={(e) => openImageModal(base64, e)}
+							src={base64}
+							alt={image.title}
+						/>			
+					{/await}
 					<p class="m-auto text-center mb-16 mt-8">{image.description}</p>
 				{/each}
 			</div>
 			<div class="w-full md:w-1/3 p-4">
 				{#each data.BodyImagesThirdThird as image}
-					<img
-						class="w-full rounded-3xl"
-						on:click={(e) => openImageModal(image.fileUrl, e)}
-						on:keypress={(e) => openImageModal(image.fileUrl, e)}
-						src={image.fileUrl}
-						alt={image.title}
-					/>
+				{#await getFileBase64FromUrl(image.fileUrl) then base64}
+				<img
+					class="w-full rounded-3xl"
+					on:click={(e) => openImageModal(base64, e)}
+					on:keypress={(e) => openImageModal(base64, e)}
+					src={base64}
+					alt={image.title}
+				/>			
+			{/await}
 					<p class="m-auto text-center mb-16 mt-8">{image.description}</p>
 				{/each}
 			</div>
@@ -75,46 +96,55 @@
 		<div class="md:flex mb-4">
 			<div class="md:w-1/4">
 				{#each data.Column1 as image}
-					<img
-						class="p-4"
-						src={image.fileUrl}
-						on:click={(e) => openImageModal(image.fileUrl, e)}
-						on:keypress={(e) => openImageModal(image.fileUrl, e)}
-						alt={image.title}
-					/>
+					{#await getFileBase64FromUrl(image.fileUrl) then base64}
+						<img
+								class="p-4"
+								src={base64}
+								on:click={(e) => openImageModal(base64, e)}
+								on:keypress={(e) => openImageModal(base64, e)}
+								alt={image.title}
+							/>	
+					{/await}
+					
 				{/each}
 			</div>
 			<div class="md:w-1/4">
 				{#each data.Column2 as image}
-					<img
-						class="p-4"
-						src={image.fileUrl}
-						on:click={(e) => openImageModal(image.fileUrl, e)}
-						on:keypress={(e) => openImageModal(image.fileUrl, e)}
-						alt={image.title}
-					/>
+					{#await getFileBase64FromUrl(image.fileUrl) then base64}
+						<img
+									class="p-4"
+									src={base64}
+									on:click={(e) => openImageModal(base64, e)}
+									on:keypress={(e) => openImageModal(base64, e)}
+									alt={image.title}
+								/>	
+					{/await}
 				{/each}
 			</div>
 			<div class="md:w-1/4">
 				{#each data.Column3 as image}
-					<img
-						class="p-4"
-						src={image.fileUrl}
-						on:click={(e) => openImageModal(image.fileUrl, e)}
-						on:keypress={(e) => openImageModal(image.fileUrl, e)}
-						alt={image.title}
-					/>
+					{#await getFileBase64FromUrl(image.fileUrl) then base64}
+						<img
+								class="p-4"
+								src={base64}
+								on:click={(e) => openImageModal(base64, e)}
+								on:keypress={(e) => openImageModal(base64, e)}
+								alt={image.title}
+							/>	
+					{/await}
 				{/each}
 			</div>
 			<div class="md:w-1/4">
 				{#each data.Column4 as image}
-					<img
-						class="p-4"
-						src={image.fileUrl}
-						on:click={(e) => openImageModal(image.fileUrl, e)}
-						on:keypress={(e) => openImageModal(image.fileUrl, e)}
-						alt={image.title}
-					/>
+					{#await getFileBase64FromUrl(image.fileUrl) then base64}
+						<img
+								class="p-4"
+								src={base64}
+								on:click={(e) => openImageModal(base64, e)}
+								on:keypress={(e) => openImageModal(base64, e)}
+								alt={image.title}
+							/>	
+					{/await}
 				{/each}
 			</div>
 		</div>
