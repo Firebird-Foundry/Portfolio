@@ -40,6 +40,7 @@
 	"dependencies": {
 		"@sveltejs/adapter-node": "^1.0.0",
 		"@sveltejs/adapter-static": "^1.0.0",
+		"axios": "^1.2.2",
 		"pocketbase": "^0.9.1",
 		"sass": "^1.57.1",
 		"svelte-modals": "^1.2.1"

@@ -10,11 +10,11 @@
 		setTimeout(() => {
 			prevImageVisible = true;
 		}, 300);
-		const index = images.findIndex((image) => image.fileBase64 === src);
+		const index = images.findIndex((image) => image.id === imageId);
 		if (index === 0) {
-			src = images[images.length - 1].fileBase64;
+			imageId = images[images.length - 1].id;
 		} else {
-			src = images[index - 1].fileBase64;
+			imageId = images[index - 1].id;
 		}
 	}
 
@@ -24,12 +24,12 @@
 		setTimeout(() => {
 			nextImageVisible = true;
 		}, 300);
-		const index = images.findIndex((image) => image.fileBase64 === src);
+		const index = images.findIndex((image) => image.id === imageId);
 
 		if (index === images.length - 1) {
-			src = images[0].fileBase64;
+			imageId = images[0].id;
 		} else {
-			src = images[index + 1].fileBase64;
+			imageId = images[index + 1].id;
 		}
 	}
 
@@ -48,10 +48,12 @@
 	});
 
 	export let isOpen: boolean;
-	export let src: string;
+	export let imageId: string;
 	export let images: Image[];
 	export let prevImageVisible: boolean = true;
 	export let nextImageVisible: boolean = true;
+
+	$: imageBase64 = images.find((image) => image.id === imageId)?.fileBase64;
 </script>
 
 {#if isOpen}
@@ -71,7 +73,7 @@
 		</div>
 		<div class="contents">
 			<img
-				{src}
+				src={imageBase64}
 				class="max-w-[80vw] max-h-[90vh]"
 				alt="Preview"
 				on:click={(e) => e.stopImmediatePropagation()}
