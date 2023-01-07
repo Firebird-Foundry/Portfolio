@@ -15,6 +15,7 @@
 		"start": "export PORT=8080 && node ./build"
 	},
 	"devDependencies": {
+		"@iconify/svelte": "^3.0.1",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^1.0.0",
 		"@sveltejs/kit": "^1.0.0",
@@ -40,6 +41,7 @@
 		"@sveltejs/adapter-node": "^1.0.0",
 		"@sveltejs/adapter-static": "^1.0.0",
 		"pocketbase": "^0.9.1",
-		"sass": "^1.57.1"
+		"sass": "^1.57.1",
+		"svelte-modals": "^1.2.1"
 	}
 }
