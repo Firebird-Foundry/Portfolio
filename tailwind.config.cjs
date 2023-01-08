@@ -7,7 +7,9 @@ module.exports = {
 			secondary: '#303633',
 			tertiary: '#C6C7C4',
 			quarternary: '#0B3C49',
-			quinary: '#A2999E'
+			quinary: '#A2999E',
+			senary: '#827A7E',
+			zerory: '#FFFFFF'
 		}
 	},
 	plugins: []

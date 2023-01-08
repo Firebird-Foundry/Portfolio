@@ -9,13 +9,17 @@ export const load = (async () => {
 		filter: 'isCoverImage = true',
 		expand: 'project'
 	});
-	
+
 	for (let i = 0; i < coverImages.items.length; i++) {
-		coverImages.items[i].fileUrl = PocketBaseClient.getFileUrl(coverImages.items[i], coverImages.items[i].file);
+		coverImages.items[i].fileUrl = PocketBaseClient.getFileUrl(
+			coverImages.items[i],
+			coverImages.items[i].file
+		);
 		var fileData = await axios.get(coverImages.items[i].fileUrl, {
-			  	responseType: 'arraybuffer'
-				});
-		coverImages.items[i].fileBase64 = "data:image/png;base64," + Buffer.from(fileData.data, 'binary').toString('base64');
+			responseType: 'arraybuffer'
+		});
+		coverImages.items[i].fileBase64 =
+			'data:image/png;base64,' + Buffer.from(fileData.data, 'binary').toString('base64');
 		coverImages.items[i].expandedProject = coverImages.items[i].expand.project as Project;
 	}
 
@@ -23,8 +27,8 @@ export const load = (async () => {
 		`name = 'Intro'`
 	);
 
-	return { 
+	return {
 		CoverImages: JSON.parse(JSON.stringify(coverImages.items)),
-		Intro: intro.text 
+		Intro: intro.text
 	};
 }) satisfies PageServerLoad;
