@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Alice&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bakbak+One&family=Playfair+Display:wght@700;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,10 +10,9 @@ p {
 	@apply text-secondary;
 }
 
-h1,
-h2,
-h3 {
-	font-family: 'Futura-BoldLF';
-	font-size: 2rem;
-	font-weight: bolder;
+h1, h2
+{
+		font-family: 'Bakbak One', cursive;
+		font-size: 4rem;
+		@apply text-primary;
 }
