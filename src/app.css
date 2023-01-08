@@ -6,13 +6,12 @@
 
 p {
 	font-family: 'Alice';
-	font-size: 1.6rem;
+	font-size: 1.4rem;
 	@apply text-secondary;
 }
 
 h1,
 h2 {
 	font-family: 'Bakbak One', cursive;
-	font-size: 4rem;
 	@apply text-primary;
 }

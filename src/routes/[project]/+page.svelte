@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import type { Image } from '$lib/image';
 	import Modal from '$lib/components/Modal.svelte';
 
 	function openImageModal(id: string, e: Event) {
@@ -15,6 +16,20 @@
 	export let previewImageId: string;
 	export let showModal: boolean;
 	export let data: PageData;
+
+	$: GalleryImages = data.Images.filter((x: Image) => !x.description);
+	$: BodyImages = data.Images.filter((x: Image) => !!x.description);
+	$: BodyImageColumns = [
+		BodyImages?.filter((x: Image, i: number) => i % 3 == 0),
+		BodyImages?.filter((x: Image, i: number) => i % 3 == 1),
+		BodyImages.filter((x: Image, i: number) => i % 3 == 2)
+	];
+	$: GalleryColumns = [
+		GalleryImages?.filter((x: Image, i: number) => i % 4 == 0),
+		GalleryImages?.filter((x: Image, i: number) => i % 4 == 1),
+		GalleryImages?.filter((x: Image, i: number) => i % 4 == 2),
+		GalleryImages?.filter((x: Image, i: number) => i % 4 == 3)
+	];
 </script>
 
 <svelte:head>
@@ -34,47 +49,26 @@
 		</p>
 
 		<div class="md:flex mb-6">
-			<div class="w-full md:w-1/3 p-4">
-				{#each data.BodyImagesFirstThird as image}
-					<img
-						class="w-full rounded-3xl"
-						on:click={(e) => openImageModal(image.id, e)}
-						on:keypress={(e) => openImageModal(image.id, e)}
-						src={image.fileBase64}
-						alt={image.title}
-					/>
-					<p class="m-auto text-center mb-16 mt-8">{image.description}</p>
-				{/each}
-			</div>
-			<div class="w-full md:w-1/3 p-4">
-				{#each data.BodyImagesSecondThird as image}
-					<img
-						class="w-full rounded-3xl"
-						on:click={(e) => openImageModal(image.id, e)}
-						on:keypress={(e) => openImageModal(image.id, e)}
-						src={image.fileBase64}
-						alt={image.title}
-					/>
-					<p class="m-auto text-center mb-16 mt-8">{image.description}</p>
-				{/each}
-			</div>
-			<div class="w-full md:w-1/3 p-4">
-				{#each data.BodyImagesThirdThird as image}
-					<img
-						class="w-full rounded-3xl"
-						on:click={(e) => openImageModal(image.id, e)}
-						on:keypress={(e) => openImageModal(image.id, e)}
-						src={image.fileBase64}
-						alt={image.title}
-					/>
-					<p class="m-auto text-center mb-16 mt-8">{image.description}</p>
-				{/each}
-			</div>
+			{#each BodyImageColumns as column}
+				<div class="w-full md:w-1/3 p-4">
+					{#each column as image}
+						<img
+							class="w-full rounded-3xl"
+							on:click={(e) => openImageModal(image.id, e)}
+							on:keypress={(e) => openImageModal(image.id, e)}
+							src={image.fileBase64}
+							alt={image.title}
+						/>
+						<p class="m-auto text-center mb-16 mt-8">{image.description}</p>
+					{/each}
+				</div>
+			{/each}
 		</div>
 
 		<div class="md:flex mb-4">
+			{#each GalleryColumns as column}
 			<div class="md:w-1/4">
-				{#each data.Column1 as image}
+					{#each column as image}
 					<img
 						class="p-4"
 						src={image.fileBase64}
@@ -82,41 +76,10 @@
 						on:keypress={(e) => openImageModal(image.id, e)}
 						alt={image.title}
 					/>
-				{/each}
-			</div>
-			<div class="md:w-1/4">
-				{#each data.Column2 as image}
-					<img
-						class="p-4"
-						src={image.fileBase64}
-						on:click={(e) => openImageModal(image.id, e)}
-						on:keypress={(e) => openImageModal(image.id, e)}
-						alt={image.title}
-					/>
-				{/each}
-			</div>
-			<div class="md:w-1/4">
-				{#each data.Column3 as image}
-					<img
-						class="p-4"
-						src={image.fileBase64}
-						on:click={(e) => openImageModal(image.id, e)}
-						on:keypress={(e) => openImageModal(image.id, e)}
-						alt={image.title}
-					/>
-				{/each}
-			</div>
-			<div class="md:w-1/4">
-				{#each data.Column4 as image}
-					<img
-						class="p-4"
-						src={image.fileBase64}
-						on:click={(e) => openImageModal(image.id, e)}
-						on:keypress={(e) => openImageModal(image.id, e)}
-						alt={image.title}
-					/>
-				{/each}
-			</div>
+					{/each}
+				</div>
+			{/each}
+			
 		</div>
 	</div>
 </div>

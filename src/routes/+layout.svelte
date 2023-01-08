@@ -13,7 +13,7 @@
 	<div class="w-1/12 my-auto">
 		<a href="/">
 			<svg
-				class="h-16 pl-32 m-auto fill-current text-tertiary hover:text-secondary"
+				class="h-14 pl-32 m-auto fill-current text-tertiary hover:text-secondary"
 				viewBox="0 0 1520 1520"
 				version="1.1"
 				xmlns="http://www.w3.org/2000/svg"
@@ -32,8 +32,8 @@
 			</svg>
 		</a>
 	</div>
-	<div class="w-11/12 text-right pr-32">
-		<h1 class="text-tertiary">{title}</h1>
+	<div class="w-11/12 flex text-right text-5xl">
+		<h1 class="text-tertiary m-auto mr-32">{title}</h1>
 	</div>
 </div>
 <div id="viewport" class="min-h-[89vh] p-4 sm:p-8 md:p-12 text-white">
@@ -48,25 +48,25 @@
 	<div class="w-2/12 pr-32 flex">
 		<a
 			href="mailto:firebirdfoundry@gmail.com"
-			class="bg-quinary hover:bg-secondary rounded-2xl my-auto ml-auto h-16 w-16 flex"
+			class="bg-quinary hover:bg-secondary rounded-2xl my-auto ml-auto h-12 w-12  flex"
 		>
-			<Icon icon="zondicons:at-symbol" class="h-12 w-12 m-auto text-senary" />
+			<Icon icon="zondicons:at-symbol" class="h-9 w-9 m-auto text-senary" />
 		</a>
 		<a
 			href="https://github.com/FirebirdFrankie/Portfolio"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="bg-quinary hover:bg-secondary rounded-2xl my-auto mx-8 h-16 w-16 flex"
+			class="bg-quinary hover:bg-secondary rounded-xl my-auto mx-8 h-12 w-12  fflex"
 		>
-			<Icon icon="line-md:github-loop" class="h-14 w-14 m-auto text-senary" />
+			<Icon icon="line-md:github-loop" class="h-10 w-10 m-auto text-senary" />
 		</a>
 		<a
 			href="https://www.instagram.com/sonja_creates_/"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="bg-quinary hover:bg-secondary rounded-2xl my-auto  h-16 w-16 flex"
+			class="bg-quinary hover:bg-secondary rounded-xl my-auto h-12 w-12 flex"
 		>
-			<Icon icon="ph:instagram-logo-bold" class="h-14 w-14 m-auto text-senary" />
+			<Icon icon="ph:instagram-logo-bold" class="h-10 w-10 m-auto text-senary" />
 		</a>
 	</div>
 </div>
