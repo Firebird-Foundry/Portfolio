@@ -19,5 +19,12 @@ export const load = (async () => {
 		coverImages.items[i].expandedProject = coverImages.items[i].expand.project as Project;
 	}
 
-	return { CoverImages: JSON.parse(JSON.stringify(coverImages.items)) };
+	const intro = await PocketBaseClient.collection('content').getFirstListItem<Project>(
+		`name = 'Intro'`
+	);
+
+	return { 
+		CoverImages: JSON.parse(JSON.stringify(coverImages.items)),
+		Intro: intro.text 
+	};
 }) satisfies PageServerLoad;

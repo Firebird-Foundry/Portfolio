@@ -8,7 +8,7 @@
 	});
 </script>
 
-<div id="navBar" class="shadow-xl h-16 mt-4">
+<div id="navBar" class="shadow-xl h-24 mt-4">
 	<div class="flex">
 		<div class="w-1/12 m-auto">
 			<a href="/">

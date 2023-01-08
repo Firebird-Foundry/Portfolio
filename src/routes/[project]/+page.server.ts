@@ -16,6 +16,8 @@ export const load = (async ({ params }) => {
 		filter: `project = '${project.id}' && isCoverImage = false`
 	});
 
+	images.items = images.items.sort((a, b) => a.sortOrder - b.sortOrder);
+
 	for (let i = 0; i < images.items.length; i++) {
 		images.items[i].fileUrl = PocketBaseClient.getFileUrl(images.items[i], images.items[i].file);
 		var fileData = await axios.get(images.items[i].fileUrl, {
@@ -49,7 +51,7 @@ export const load = (async ({ params }) => {
 
 	return {
 		Project: JSON.parse(JSON.stringify(project)),
-		HeadingImage: JSON.parse(JSON.stringify(headingImage)),
+		HeadingImage: !!headingImage ? JSON.parse(JSON.stringify(headingImage)) : null,
 		Images: JSON.parse(JSON.stringify(galleryImages.concat(bodyImages))),
 		BodyImagesFirstThird: JSON.parse(JSON.stringify(bodyImagesFirstThird)),
 		BodyImagesSecondThird: JSON.parse(JSON.stringify(bodyImagesSecondThird)),

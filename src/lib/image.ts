@@ -11,4 +11,6 @@ export interface Image extends Record {
 	fileUrl: string;
 	expandedProject: Project;
 	fileBase64: string;
+	clientHeight: number;
+	clientWidth: number;
 }
