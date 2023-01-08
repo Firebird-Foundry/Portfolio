@@ -10,9 +10,9 @@ p {
 	@apply text-secondary;
 }
 
-h1, h2
-{
-		font-family: 'Bakbak One', cursive;
-		font-size: 4rem;
-		@apply text-primary;
+h1,
+h2 {
+	font-family: 'Bakbak One', cursive;
+	font-size: 4rem;
+	@apply text-primary;
 }

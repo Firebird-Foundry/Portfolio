@@ -21,9 +21,10 @@ export const load = (async ({ params }) => {
 	for (let i = 0; i < images.items.length; i++) {
 		images.items[i].fileUrl = PocketBaseClient.getFileUrl(images.items[i], images.items[i].file);
 		var fileData = await axios.get(images.items[i].fileUrl, {
-			  	responseType: 'arraybuffer'
-				});
-		images.items[i].fileBase64 = "data:image/png;base64," + Buffer.from(fileData.data, 'binary').toString('base64');
+			responseType: 'arraybuffer'
+		});
+		images.items[i].fileBase64 =
+			'data:image/png;base64,' + Buffer.from(fileData.data, 'binary').toString('base64');
 	}
 
 	var headingImageIndex = images.items.findIndex((image) => image.isHeaderImage);
