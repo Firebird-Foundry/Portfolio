@@ -40,7 +40,7 @@
 		<h1 class="text-tertiary m-auto mr-[5vw]">{titleValue}</h1>
 	</div>
 </div>
-<div id="viewport" class="min-h-[89vh] p-4 sm:p-8 md:p-12 text-white  w-[100vw]">
+<div id="viewport" class="min-h-[89vh] p-4 sm:p-8 md:p-12 text-white">
 	<slot />
 </div>
 <div id="footer" class="shadow-md bg-senary md:flex  md:h-16 lg:h-18 pt-2 md:pt-0">
