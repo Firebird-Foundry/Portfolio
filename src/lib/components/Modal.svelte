@@ -57,7 +57,7 @@
 </script>
 
 {#if isOpen}
-	<div role="dialog" class="modal">
+	<div role="dialog" class="modal z-50">
 		<div
 			id="previousImage"
 			on:click={previousImage}

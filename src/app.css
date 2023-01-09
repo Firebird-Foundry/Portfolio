@@ -8,10 +8,12 @@ p {
 	font-family: 'Alice';
 	font-size: 1.4rem;
 	@apply text-secondary;
+	word-break: break-word;
 }
 
 h1,
 h2 {
 	font-family: 'Bakbak One', cursive;
 	@apply text-primary;
+	word-break: break-word;
 }
