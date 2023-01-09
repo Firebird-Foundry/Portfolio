@@ -28,9 +28,7 @@ export const load = (async () => {
 	);
 
 	return {
-		CoverImages: JSON.parse(
-			JSON.stringify(coverImages.items.concat(coverImages.items).concat(coverImages.items))
-		),
+		CoverImages: JSON.parse(JSON.stringify(coverImages.items)),
 		Intro: intro.text
 	};
 }) satisfies PageServerLoad;
