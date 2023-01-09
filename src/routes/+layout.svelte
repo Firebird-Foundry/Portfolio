@@ -1,11 +1,13 @@
 <script>
 	import '../app.css';
-	import { onMount } from 'svelte';
 	import Icon from '@iconify/svelte';
+	import { title } from '$lib/stores';
 
-	let title = 'Firebird Foundry';
-	onMount(() => {
-		title = !document ? 'Firebird Foundry' : document.title;
+	let titleValue = '';
+
+	title.subscribe((value) => {
+		console.log(value);
+		titleValue = value;
 	});
 </script>
 
@@ -33,10 +35,9 @@
 				</svg>
 			</a>
 		</div>
-
 	</div>
 	<div class="w-11/12 flex text-right text-2xl sm:text-4xl md:text-5xl">
-		<h1 class="text-tertiary m-auto mr-[5vw]">{title}</h1>
+		<h1 class="text-tertiary m-auto mr-[5vw]">{titleValue}</h1>
 	</div>
 </div>
 <div id="viewport" class="min-h-[89vh] p-4 sm:p-8 md:p-12 text-white  w-[100vw]">
@@ -48,7 +49,7 @@
 			Website Created by Sonja Hanekom in Collaboration with Renton Mc Intyre
 		</p>
 	</div>
-    <div class="w-full md:w-4/12 lg:w-2/12 md:pr-32 flex pb-4 md:pb-0">
+	<div class="w-full md:w-4/12 lg:w-2/12 md:pr-32 flex pb-4 md:pb-0">
 		<a
 			href="mailto:firebirdfoundry@gmail.com"
 			class="bg-quinary hover:bg-secondary rounded-2xl my-auto ml-auto h-12 min-w-[3rem]  flex"
@@ -74,19 +75,17 @@
 	</div>
 </div>
 
-
 <style>
 	a.svg {
-  position: relative;
-  display: inline-block; 
-}
-a.svg:after {
-  content: ""; 
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left:0;
-}
-
+		position: relative;
+		display: inline-block;
+	}
+	a.svg:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
 </style>
