@@ -1,13 +1,16 @@
 <script lang="ts">
 	import type { Image } from '$lib/image';
+	import Icon from '@iconify/svelte';
 	import type { PageServerData } from './$types';
 
 	export let data: PageServerData;
 
-	$: Column1 = data.CoverImages.filter((x: Image, i: number) => i % 4 == 0);
-	$: Column2 = data.CoverImages.filter((x: Image, i: number) => i % 4 == 1);
-	$: Column3 = data.CoverImages.filter((x: Image, i: number) => i % 4 == 2);
-	$: Column4 = data.CoverImages.filter((x: Image, i: number) => i % 4 == 3);
+	$: Columns = [
+		data.CoverImages.filter((x: Image, i: number) => i % 4 == 0),
+		data.CoverImages.filter((x: Image, i: number) => i % 4 == 1),
+		data.CoverImages.filter((x: Image, i: number) => i % 4 == 2),
+		data.CoverImages.filter((x: Image, i: number) => i % 4 == 3)
+	];
 </script>
 
 <svelte:head>
@@ -19,122 +22,39 @@
 		{data.Intro}
 	</p>
 
-	<div class="md:flex mb-4">
-		<div class="md:w-1/4">
-			{#each Column1 as coverImage}
-				<a href="/{coverImage.expandedProject.name}">
-					<div class="box m-4 rounded-3xl ">
-						<div
-							class="tether"
-							id={'image-' + coverImage.id}
-							bind:clientHeight={coverImage.clientHeight}
-							bind:clientWidth={coverImage.clientWidth}
-						>
-							<img class="rounded-3xl" src={coverImage.fileBase64} alt={coverImage.title} />
-						</div>
-						<div
-							class="tethered"
-							style="height: {coverImage.clientHeight}px; width: {coverImage.clientWidth}px"
-						>
-							<div class="rounded-3xl bg-secondary h-full p-16" id={'description-' + coverImage.id}>
-								<h1 class="mb-4">{coverImage.expandedProject.name}</h1>
-								<p class="text-tertiary">{coverImage.expandedProject.description}</p>
-							</div>
-						</div>
-					</div>
-				</a>
-			{/each}
-		</div>
-		<div class="md:w-1/4">
-			{#each Column2 as coverImage}
-				<a href="/{coverImage.expandedProject.name}">
-					<div class="box">
-						<div class="box m-4 rounded-3xl ">
-							<div
-								class="tether"
-								id={'image-' + coverImage.id}
-								bind:clientHeight={coverImage.clientHeight}
-								bind:clientWidth={coverImage.clientWidth}
-							>
-								<img class="rounded-3xl" src={coverImage.fileBase64} alt={coverImage.title} />
-							</div>
-							<div
-								class="tethered"
-								style="height: {coverImage.clientHeight}px; width: {coverImage.clientWidth}px"
-							>
+	<div class="lg:flex mb-4 overflow-hidden">
+		{#each Columns as column}
+			<div class="lg:w-1/4">
+					{#each column as coverImage}
+							<div class="box m-4 rounded-3xl ">
 								<div
-									class="rounded-3xl bg-secondary h-full p-16"
-									id={'description-' + coverImage.id}
+									class="tether"
+									id={'image-' + coverImage.id}
+									bind:clientHeight={coverImage.clientHeight}
+									bind:clientWidth={coverImage.clientWidth}
 								>
-									<h1 class="mb-4">{coverImage.expandedProject.name}</h1>
-									<p class="text-tertiary">{coverImage.expandedProject.description}</p>
+									<img class="rounded-3xl" src={coverImage.fileBase64} alt={coverImage.title} />
+								</div>
+								<div
+									class="tethered"
+									style="height: {coverImage.clientHeight}px; width: {coverImage.clientWidth}px"
+								>
+								<a href="/{coverImage.expandedProject.name}">
+									<div class="rounded-3xl bg-secondary h-full p-[7%] pr-[15%] flex" id={'description-' + coverImage.id}>
+										<div class="w-11/12">
+											<h1 class="mb-1 xl:mb-4 text-2xl sm:text-4xl md:text-5xl lg:text-xl xl:text-4xl 2xl:text-5xl">{coverImage.expandedProject.name}</h1>
+											<p class="text-tertiary text-base md:text-xl lg:text-sm xl:text-xl">{coverImage.expandedProject.description}</p>
+										</div>
+										<div class="w-1/12 m-auto" >
+											<Icon icon="bi:chevron-compact-right" class="h-12 w-12 text-tertiary" />
+										</div>
+									</div>
+								</a>
 								</div>
 							</div>
-						</div>
-					</div></a
-				>
-			{/each}
-		</div>
-		<div class="md:w-1/4">
-			{#each Column3 as coverImage}
-				<a href="/{coverImage.expandedProject.name}">
-					<div class="box">
-						<div class="box m-4 rounded-3xl ">
-							<div
-								class="tether"
-								id={'image-' + coverImage.id}
-								bind:clientHeight={coverImage.clientHeight}
-								bind:clientWidth={coverImage.clientWidth}
-							>
-								<img class="rounded-3xl" src={coverImage.fileBase64} alt={coverImage.title} />
-							</div>
-							<div
-								class="tethered"
-								style="height: {coverImage.clientHeight}px; width: {coverImage.clientWidth}px"
-							>
-								<div
-									class="rounded-3xl bg-secondary h-full p-16"
-									id={'description-' + coverImage.id}
-								>
-									<h1 class="mb-4">{coverImage.expandedProject.name}</h1>
-									<p class="text-tertiary">{coverImage.expandedProject.description}</p>
-								</div>
-							</div>
-						</div>
-					</div></a
-				>
-			{/each}
-		</div>
-		<div class="md:w-1/4">
-			{#each Column4 as coverImage}
-				<a href="/{coverImage.expandedProject.name}">
-					<div class="box">
-						<div class="box m-4 rounded-3xl ">
-							<div
-								class="tether"
-								id={'image-' + coverImage.id}
-								bind:clientHeight={coverImage.clientHeight}
-								bind:clientWidth={coverImage.clientWidth}
-							>
-								<img class="rounded-3xl" src={coverImage.fileBase64} alt={coverImage.title} />
-							</div>
-							<div
-								class="tethered"
-								style="height: {coverImage.clientHeight}px; width: {coverImage.clientWidth}px"
-							>
-								<div
-									class="rounded-3xl bg-secondary h-full p-16"
-									id={'description-' + coverImage.id}
-								>
-									<h1 class="mb-4">{coverImage.expandedProject.name}</h1>
-									<p class="text-tertiary">{coverImage.expandedProject.description}</p>
-								</div>
-							</div>
-						</div>
-					</div></a
-				>
-			{/each}
-		</div>
+					{/each}
+			</div>
+		{/each}
 	</div>
 </div>
 
