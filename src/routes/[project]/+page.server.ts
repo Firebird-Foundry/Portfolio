@@ -3,11 +3,21 @@ import { PocketBaseClient } from '$lib/pocketbaseClient.server';
 import type { Project } from '$lib/project';
 import type { Image } from '$lib/image';
 import axios from 'axios';
+import { error } from '@sveltejs/kit';
 
 export const load = (async ({ params }) => {
-	const project = await PocketBaseClient.collection('projects').getFirstListItem<Project>(
-		`name = '${params.project}'`
-	);
+	let project: Project;
+	try {
+		project = await PocketBaseClient.collection('projects').getFirstListItem<Project>(
+			`name = '${params.project}'`
+		);
+	}
+	catch (e) {
+		throw error(404, {
+			message: 'Not found'
+		  });
+	}
+
 	const images = await PocketBaseClient.collection('images').getList<Image>(1, 50, {
 		filter: `project = '${project.id}' && isCoverImage = false`
 	});
