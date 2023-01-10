@@ -9,9 +9,8 @@
 	let loading = false;
 
 	function startLoading() {
-		if (titleValue !== 'Firebird Foundry')
-			ffLoading.set(true);
-	};
+		if (titleValue !== 'Firebird Foundry') ffLoading.set(true);
+	}
 
 	title.subscribe((value) => {
 		titleValue = value;
@@ -22,8 +21,8 @@
 	});
 
 	let darkMode = false;
-	onMount(() => { 
-		darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+	onMount(() => {
+		darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 	});
 </script>
 

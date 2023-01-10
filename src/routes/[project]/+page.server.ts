@@ -11,11 +11,10 @@ export const load = (async ({ params }) => {
 		project = await PocketBaseClient.collection('projects').getFirstListItem<Project>(
 			`name = '${params.project}'`
 		);
-	}
-	catch (e) {
+	} catch (e) {
 		throw error(404, {
 			message: 'Not found'
-		  });
+		});
 	}
 
 	const images = await PocketBaseClient.collection('images').getList<Image>(1, 50, {
