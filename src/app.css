@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-flow: column;
+  }
+
 p {
 	font-family: 'Alice';
 	font-size: 1.4rem;
