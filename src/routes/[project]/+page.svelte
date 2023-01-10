@@ -3,7 +3,7 @@
 	import type { Image } from '$lib/image';
 	import Modal from '$lib/components/Modal.svelte';
 	import { onMount } from 'svelte';
-	import { title } from '$lib/stores';
+	import { ffLoading, title } from '$lib/stores';
 
 	function openImageModal(id: string, e: Event) {
 		if (showModal) return;
@@ -39,6 +39,7 @@
 
 	onMount(() => {
 		title.set(data.Project.name);
+		ffLoading.set(false);
 		scroll(0, 0);
 		const observer = new IntersectionObserver(
 			(entries) => {

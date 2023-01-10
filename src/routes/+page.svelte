@@ -3,7 +3,7 @@
 	import Icon from '@iconify/svelte';
 	import type { PageServerData } from './$types';
 	import { onMount } from 'svelte';
-	import { title } from '$lib/stores';
+	import { ffLoading, title } from '$lib/stores';
 
 	export let data: PageServerData;
 
@@ -16,6 +16,7 @@
 
 	onMount(() => {
 		title.set('Firebird Foundry');
+		ffLoading.set(false);
 	});
 </script>
 
@@ -45,14 +46,14 @@
 							class="tethered"
 							style="height: {coverImage.clientHeight}px; width: {coverImage.clientWidth}px"
 						>
-							<a href="/{coverImage.expandedProject.name}">
+							<a href="/{coverImage.expandedProject.name}" on:click={() => ffLoading.set(true)}>
 								<div
 									class="rounded-3xl bg-secondary h-full p-[7%] pr-[15%] flex"
 									id={'description-' + coverImage.id}
 								>
 									<div class="w-11/12">
 										<h1
-											class="mb-1 xl:mb-4 text-2xl sm:text-4xl md:text-5xl lg:text-xl xl:text-4xl 2xl:text-5xl"
+											class="mb-1 xl:mb-4 text-2xl sm:text-4xl md:text-5xl lg:text-xl xl:text-4xl"
 										>
 											{coverImage.expandedProject.name}
 										</h1>

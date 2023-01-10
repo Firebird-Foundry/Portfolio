@@ -1,20 +1,50 @@
 <script>
 	import '../app.css';
 	import Icon from '@iconify/svelte';
-	import { title } from '$lib/stores';
+	import { ffLoading, title } from '$lib/stores';
+	import { onMount } from 'svelte';
+	import { BarLoader } from 'svelte-loading-spinners';
 
 	let titleValue = '';
+	let loading = false;
+
+	function startLoading() {
+		if (titleValue !== 'Firebird Foundry')
+			ffLoading.set(true);
+	};
 
 	title.subscribe((value) => {
-		console.log(value);
 		titleValue = value;
 	});
+
+	ffLoading.subscribe((value) => {
+		loading = value;
+	});
+
+	let darkMode = false;
+	onMount(() => { 
+		darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+	});
 </script>
+
+<svelte:head>
+	{#if darkMode}
+		<link rel="icon" href="/favicon-light.png" />
+	{:else}
+		<link rel="icon" href="/favicon-dark.png" />
+	{/if}
+</svelte:head>
+
+{#if loading}
+	<div id="loader">
+		<BarLoader size="10" color="#9A6D38" unit="vw" duration="5s" />
+	</div>
+{/if}
 
 <div id="navBar" class="shadow-md bg-senary flex h-12 sm:h-14 md:h-16 lg:h-18">
 	<div class="w-1/12 flex">
 		<div class="m-auto pl-[5vw] flex">
-			<a href="/" class="svg text-tertiary hover:text-secondary">
+			<a href="/" on:click={startLoading} class="svg text-tertiary hover:text-secondary">
 				<svg
 					class="h-10 sm:h-10 md:h-12 lg:h-12 m-auto fill-current "
 					viewBox="0 0 1520 1520"
@@ -87,5 +117,18 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
+	}
+
+	#loader {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 9999;
+		background: rgba(0, 0, 0, 0.75);
 	}
 </style>
