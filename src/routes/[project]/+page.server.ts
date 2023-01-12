@@ -7,7 +7,6 @@ import { error } from '@sveltejs/kit';
 
 export const load = (async ({ params }) => {
 	let project: Project;
-	console.log(params.project)
 	project = await PocketBaseClient.collection('projects').getFirstListItem<Project>(
 		`name = '${params.project}'`
 	);
@@ -29,7 +28,6 @@ export const load = (async ({ params }) => {
 
 	for (let i = 0; i < images.items.length; i++) {
 		images.items[i].fileUrl = PocketBaseClient.getFileUrl(images.items[i], images.items[i].file);
-		console.log(images.items[i].fileUrl)
 		var fileData = await axios.get(images.items[i].fileUrl, {
 			responseType: 'arraybuffer'
 		});
