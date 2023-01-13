@@ -46,7 +46,7 @@
 							class="tethered"
 							style="height: {coverImage.clientHeight}px; width: {coverImage.clientWidth}px"
 						>
-							<a href="/{coverImage.expandedProject.name}">
+							<a href="/{coverImage.expandedProject.name}" on:click={() => ffLoading.set(true)}>
 								<div
 									class="rounded-3xl bg-secondary h-full p-[7%] pr-[15%] flex"
 									id={'description-' + coverImage.id}
@@ -76,7 +76,6 @@
 
 <style lang="scss">
 	.tethered {
-		display: inline;
 		position: absolute;
 		left: -100%;
 		top: 0;
