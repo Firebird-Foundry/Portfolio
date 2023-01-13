@@ -33,7 +33,7 @@
 		{#each Columns as column}
 			<div class="lg:w-1/4">
 				{#each column as coverImage}
-					<div class="box m-4 rounded-3xl ">
+					<div class="box m-2 rounded-3xl ">
 						<div
 							class="tether"
 							id={'image-' + coverImage.id}
