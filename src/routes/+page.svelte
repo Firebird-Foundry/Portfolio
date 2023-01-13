@@ -80,11 +80,11 @@
 								>
 									<div class="w-11/12">
 										<h1
-											class="mb-1 xl:mb-4 text-2xl sm:text-4xl md:text-5xl lg:text-xl xl:text-4xl"
+											class="mb-1 xl:mb-2 text-2xl sm:text-4xl md:text-5xl lg:text-xl xl:text-2xl"
 										>
 											{coverImage.expandedProject.name}
 										</h1>
-										<p class="text-tertiary text-base md:text-xl lg:text-sm xl:text-xl">
+										<p class="text-tertiary text-base md:text-xl lg:text-sm xl:text-lg">
 											{coverImage.expandedProject.description}
 										</p>
 									</div>
