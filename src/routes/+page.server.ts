@@ -10,6 +10,7 @@ export const load = (async () => {
 		expand: 'project'
 	});
 
+
 	for (let i = 0; i < coverImages.items.length; i++) {
 		coverImages.items[i].fileUrl = PocketBaseClient.getFileUrl(
 			coverImages.items[i],
@@ -22,6 +23,7 @@ export const load = (async () => {
 			'data:image/png;base64,' + Buffer.from(fileData.data, 'binary').toString('base64');
 		coverImages.items[i].expandedProject = coverImages.items[i].expand.project as Project;
 	}
+	coverImages.items = coverImages.items.sort((a, b) => a.expandedProject.sortOrder - b.expandedProject.sortOrder);
 
 	const intro = await PocketBaseClient.collection('content').getFirstListItem<Project>(
 		`name = 'Intro'`
