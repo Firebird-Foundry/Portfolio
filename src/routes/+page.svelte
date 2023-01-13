@@ -7,6 +7,31 @@
 
 	export let data: PageServerData;
 
+	let observer: ResizeObserver;
+	let callbacks: WeakMap<Element, (element: Element) => any>;
+
+	export function resizeObserver(element: Element, onResize: (element: Element) => any) {
+	if (!observer) {
+		callbacks = new WeakMap();
+		observer = new ResizeObserver(entries => {
+			for (const entry of entries) {
+				const onResize = callbacks.get(entry.target);
+				if (onResize) onResize(entry.target);
+			}
+		});
+	}
+
+   callbacks.set(element, onResize);
+   observer.observe(element);
+
+   return {
+      destroy: () => {
+         callbacks.delete(element);
+         observer.unobserve(element);
+      },
+   };
+}
+
 	$: Columns = [
 		data.CoverImages.filter((x: Image, i: number) => i % 4 == 0),
 		data.CoverImages.filter((x: Image, i: number) => i % 4 == 1),
@@ -37,8 +62,10 @@
 						<div
 							class="tether"
 							id={'image-' + coverImage.id}
-							bind:clientHeight={coverImage.clientHeight}
-							bind:clientWidth={coverImage.clientWidth}
+							use:resizeObserver={element => {
+								coverImage.clientHeight = element.clientHeight;
+								coverImage.clientWidth = element.clientWidth;
+							}}
 						>
 							<img class="rounded-3xl" src={coverImage.fileBase64} alt={coverImage.title} />
 						</div>
