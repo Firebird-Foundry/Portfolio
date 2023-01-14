@@ -75,7 +75,7 @@
 <div id="footer" class="shadow-md bg-senary md:flex  md:h-16 lg:h-18 pt-2 md:pt-0">
 	<div class="md:flex md:w-8/12 lg:w-10/12 md:pl-[5vw]">
 		<p class="my-auto text-tertiary text-center text-base sm:text-lg md:text-xl">
-			Website Created by Sonja Hanekom in Collaboration with Renton Mc Intyre
+			Designer:&nbsp;Sonja&nbsp;Hanekom | Developer:&nbsp;Renton&nbsp;McIntyre | Copyright&nbsp;{ new Date().getFullYear() }
 		</p>
 	</div>
 	<div class="w-full md:w-4/12 lg:w-2/12 md:pr-32 flex pb-4 md:pb-0">
