@@ -23,3 +23,8 @@ h2 {
 	@apply text-primary;
 	word-break: break-word;
 }
+
+a {
+	@apply text-quarternary;
+	text-decoration: underline;
+}
