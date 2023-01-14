@@ -84,7 +84,7 @@
 		{/if}
 
 		<p class="text-center mb-16">
-			{data.Project.blurb}
+			{@html data.Project.blurb}
 		</p>
 		<div class="md:flex mb-6 pt-4">
 			{#each BodyImageColumns as column, columnIndex}
