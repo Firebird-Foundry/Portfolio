@@ -40,7 +40,7 @@
 
 {#if loading}
 	<div id="loader">
-		<BarLoader size="10" color="#9A6D38" unit="vw" duration="5s" />
+		<BarLoader size="10" color="#9A6D38" unit="vw" duration="3s" />
 	</div>
 {/if}
 
