@@ -23,6 +23,10 @@
 	let darkMode = false;
 	onMount(() => {
 		darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+		window.addEventListener('popstate', () => {
+			ffLoading.set(true);
+		});
 	});
 </script>
 
